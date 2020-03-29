@@ -1,0 +1,76 @@
+/* this file is loaded by index.html and styles the page */
+
+* {
+  box-sizing: border-box;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 1.4rem;
+}
+
+.percentage {
+  font-size: 9rem;
+   color: white;
+}
+
+.percentage-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content.danger {
+  background-color: #dc3545;
+}
+
+.content.success {
+  background-color: #28a745;
+}
+
+.content.warning {
+  background-color: #ffc107;
+}
+
+.selector {
+  padding: 2rem;
+}
+
+.selector span {
+  margin-right: 0.5rem;
+}
+
+select {
+    background-color: #fff;
+    border-color: #dbdbdb;
+    border-width: 1px;
+    color: #363636;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: calc(.5em - 1px);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: calc(.5em - 1px);
+    text-align: center;
+    white-space: nowrap;
+}

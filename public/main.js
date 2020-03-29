@@ -1,14 +1,10 @@
-import {
-  createElement as h,
-  render
-} from "https://unpkg.com/preact@latest?module";
-import htm from "https://unpkg.com/htm@latest?module";
+import { render } from "https://unpkg.com/preact@latest?module";
 import {
   useState,
   useEffect
 } from "https://unpkg.com/preact@latest/hooks/dist/hooks.module.js?module";
-
-const html = htm.bind(h);
+import { html } from "./html.js";
+import { Spinner } from "./spinner.js";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -24,7 +20,7 @@ const App = () => {
       .then(res => {
         if (!mounted) return;
         setData(res);
-        const defaultValue = window.location.hash.replace("#", "") || "World"
+        const defaultValue = window.location.hash.replace("#", "") || "World";
         setCurrent(res.find(item => item.country === defaultValue));
       })
       .finally(() => setLoading(false));
@@ -33,13 +29,16 @@ const App = () => {
       mounted = false;
     };
   }, []);
-  
-  const changeCountry = value => {
-    setCurrent(data.find(item => item.country === value))
-    window.location.hash = value
-  }
 
-  if (loading) return null;
+  const changeCountry = value => {
+    setCurrent(data.find(item => item.country === value));
+    window.location.hash = value;
+  };
+
+  if (loading)
+    return html`
+      <${Spinner} />
+    `;
 
   const { totalCases, activeCases } = current;
 
@@ -57,26 +56,45 @@ const App = () => {
 
   return html`
     <div class="content ${color}">
-      <div class="first-part">Covid-19 is</div>
-      <div class="percentage-wrapper">
-        <div class="percentage heartBeat animated">${percentage}%</div>
+      <div class="content-wrapper">
+        <div class="first-part">Covid-19 is</div>
+        <div class="percentage-wrapper">
+          <div class="percentage heartBeat animated">${percentage}%</div>
+        </div>
+        <div class="selector">
+          <span>gone at</span>
+          <select
+            value=${current.country}
+            onChange=${e => changeCountry(e.target.value)}
+          >
+            ${data.map(
+              item =>
+                html`
+                  <option value=${item.country}>${item.country}</option>
+                `
+            )}
+          </select>
+        </div>
+
+        <div class="more-info">
+          <div class="more-info-item">
+            <div class="label">Active cases</div>
+            <div class="value">
+              ${new Intl.NumberFormat().format(current.activeCases)}
+            </div>
+          </div>
+          <div class="more-info-item">
+            <div class="label">Total cases</div>
+            <div class="value">
+              ${new Intl.NumberFormat().format(current.totalCases)}
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="selector">
-        <span>gone at</span>
-        <select
-          value=${current.country}
-          onChange=${e =>
-            changeCountry(e.target.value)
-        }
-        >
-          ${data.map(
-            item =>
-              html`
-                <option value=${item.country}>${item.country}</option>
-              `
-          )}
-        </select>
-      </div>
+      <footer>
+        Made with ${" "}
+        <a href="https://glitch.com/edit/#!/covid19progress">Glitch</a>
+      </footer>
     </div>
   `;
 };

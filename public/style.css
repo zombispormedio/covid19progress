@@ -2,7 +2,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 
 html,
@@ -26,12 +26,21 @@ body {
   justify-content: center;
   height: 100%;
   width: 100%;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
   font-size: 1.4rem;
 }
 
 .percentage {
   font-size: 9rem;
-   color: white;
+  color: white;
 }
 
 .percentage-wrapper {
@@ -53,7 +62,7 @@ body {
 }
 
 .selector {
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .selector span {
@@ -61,16 +70,48 @@ body {
 }
 
 select {
-    background-color: #fff;
-    border-color: #dbdbdb;
-    border-width: 1px;
-    color: #363636;
-    cursor: pointer;
-    justify-content: center;
-    padding-bottom: calc(.5em - 1px);
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: calc(.5em - 1px);
-    text-align: center;
-    white-space: nowrap;
+  background-color: #fff;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #363636;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.more-info {
+  display: flex;
+  margin-top: 2rem;
+}
+
+.more-info > .more-info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.more-info > .more-info-item:first-child {
+  margin-right: 2rem;
+}
+
+.more-info > .more-info-item:last-child {
+  margin-left: 2rem;
+}
+
+footer {
+  margin-bottom: 1rem;
+  font-size: 0.95em;
+}
+
+.loading-spinner {
+  font-size: 8em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

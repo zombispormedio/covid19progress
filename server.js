@@ -31,27 +31,16 @@ app.get("/api/status", async (req, res) => {
         country.firstChild.type === "text"
           ? country.firstChild.data
           : country.firstChild.firstChild.data,
-      totalCases: Number(totalCases.firstChild.data.replace(",", "")),
-      activeCases: Number(activeCases.firstChild.data.replace(",", ""))
+      totalCases: Number(totalCases.firstChild.data.replace(/,/g, "")),
+      activeCases: Number(activeCases.firstChild.data.replace(/,/g, ""))
     })
   ).sort((a, b) =>  {
     if(a.totalCases < b.totalCases) return 1;
     if(a.totalCases > b.totalCases) return -1;
     return 0;
   })
-
-  const world = data.reduce(
-    (acc, { totalCases, activeCases }) => ({
-      totalCases: acc.totalCases + totalCases,
-      activeCases: acc.activeCases + activeCases
-    }),
-    {
-      totalCases: 0,
-      activeCases: 0
-    }
-  );
   
-  res.json([{country: "World", ...world}, ...data])
+  res.json(data)
 })
 
 

@@ -21,7 +21,7 @@ const App = () => {
         if (!mounted) return;
         setData(res);
         const defaultValue = window.location.hash.replace("#", "") || "World";
-        setCurrent(res.find(item => item.country === defaultValue));
+        setCurrent(res.find(item => item.place === defaultValue));
       })
       .finally(() => setLoading(false));
 
@@ -30,8 +30,8 @@ const App = () => {
     };
   }, []);
 
-  const changeCountry = value => {
-    setCurrent(data.find(item => item.country === value));
+  const changePlace = value => {
+    setCurrent(data.find(item => item.place === value));
     window.location.hash = value;
   };
 
@@ -64,13 +64,13 @@ const App = () => {
         <div class="selector">
           <span>gone at</span>
           <select
-            value=${current.country}
-            onChange=${e => changeCountry(e.target.value)}
+            value=${current.place}
+            onChange=${e => changePlace(e.target.value)}
           >
             ${data.map(
               item =>
                 html`
-                  <option value=${item.country}>${item.country}</option>
+                  <option value=${item.place}>${item.place}</option>
                 `
             )}
           </select>

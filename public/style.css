@@ -61,6 +61,10 @@ body {
   background-color: #ffc107;
 }
 
+.content.unknown {
+  background-color: #a59e9e;
+}
+
 .selector {
   padding: 1.5rem;
 }

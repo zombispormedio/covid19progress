@@ -42,9 +42,10 @@ const App = () => {
 
   const { totalCases, activeCases } = current;
 
-  const percentage = Math.round(
-    ((totalCases - activeCases) / totalCases) * 100
-  );
+  const percentage =
+    activeCases === "N/A" || totalCases === "N/A"
+      ? "-"
+      : Math.round(((totalCases - activeCases) / totalCases) * 100);
 
   let color = "danger";
 
@@ -52,6 +53,8 @@ const App = () => {
     color = "warning";
   } else if (percentage >= 75) {
     color = "success";
+  } else if (percentage === "-"){
+    color = "unknown"
   }
 
   return html`
@@ -80,13 +83,17 @@ const App = () => {
           <div class="more-info-item">
             <div class="label">Active cases</div>
             <div class="value">
-              ${new Intl.NumberFormat().format(current.activeCases)}
+              ${current.activeCases === "N/A"
+                ? "N/A"
+                : new Intl.NumberFormat().format(current.activeCases)}
             </div>
           </div>
           <div class="more-info-item">
             <div class="label">Total cases</div>
             <div class="value">
-              ${new Intl.NumberFormat().format(current.totalCases)}
+              ${current.totalCases === "N/A"
+                ? "N/A"
+                : new Intl.NumberFormat().format(current.totalCases)}
             </div>
           </div>
         </div>
